@@ -1,0 +1,88 @@
+server:
+  port: 9959
+  context-path: /flowBuy
+  tomcat:
+    max-threads: 1000
+    uri-encoding: UTF-8
+  display-name: flowBuy
+  
+spring:
+  application:
+    name: flowBuy
+  profiles: # 环境 dev|prod|test
+    active: test
+  jackson:
+    time-zone: GMT+8
+    date-format: yyyy-MM-dd HH:mm:ss
+    default-property-inclusion: non_null
+  resources:
+    static-locations: classpath:/META-INF/resources/,classpath:/resources/
+  http:
+    multipart:
+      max-file-size: -1
+      max-request-size: -1
+      enabled: true
+      resolveLazily: true
+    encoding:
+      charset: UTF-8
+      enabled: true
+      force: true
+  datasource:
+    name: druid
+    driver-class-name: com.mysql.jdbc.Driver
+    type: com.alibaba.druid.pool.DruidDataSource
+    maxActive: 20
+    initialSize: 5
+    maxWait: 60000
+    minIdle: 5
+    timeBetweenEvictionRunsMillis: 60000
+    minEvictableIdleTimeMillis: 300000
+    validationQuery: select 1 from dual
+    testWhileIdle: true
+    testOnBorrow: false
+    testOnReturn: false
+    poolPreparedStatements: false
+    maxOpenPreparedStatements: -1
+    filters: stat,wall,log4j
+  cache:
+    type: redis
+  redis:
+    timeout: 10000
+    database: 0
+    pool:
+      max-active: 2000
+      max-wait: 1000
+      max-idle: 500
+      min-idle: 50
+
+mybatis-plus:
+  typeAliasesPackage: com.senld.gzlt.flowBuy.entity
+  mapper-locations: classpath:mybatis/*.xml
+  global-config:
+    id-type: 2 #主键类型  0:"数据库ID自增", 1:"用户输入ID",2:"全局唯一ID (数字类型唯一ID)", 3:"全局唯一ID UUID";
+    db-column-underline: true  #驼峰下划线转换
+    field-strategy: 2  #字段策略 0:"忽略判断",1:"非 NULL 判断"),2:"非空判断"
+    refresh-mapper: true #刷新mapper 调试时用，不必重启系统
+    logic-delete-value: 1
+    logic-not-delete-value: 0
+    sql-injector: com.baomidou.mybatisplus.mapper.LogicSqlInjector
+  configuration:
+    map-underscore-to-camel-case: true
+    cache-enabled: false
+eureka:
+  client:
+    register-with-eureka: true
+    fetch-registry: true
+    healthcheck:
+      enabled: true
+  instance:
+    hostname: ${spring.application.name}
+    preferIpAddress: true #显示ip地址
+    instance-id: ${spring.cloud.client.ipAddress}:${server.port}:${eureka.instance.hostname} # 将Instance ID设置成IP:端口的形式
+    lease-renewal-interval-in-seconds: 10       # 拉取服务时间间隔（默认30秒）
+    lease-expiration-duration-in-seconds: 30    # 心跳超时时间（默认90秒）
+
+
+logging:
+  config: classpath:log-config.xml # 日志配置文件
+

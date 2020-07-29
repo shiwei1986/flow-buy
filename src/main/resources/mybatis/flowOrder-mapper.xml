@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.senld.gzlt.flowBuy.mapper.FlowOrderMapper">
+
+	<!-- 通用查询映射结果 -->
+	<resultMap id="BaseResultMap" type="com.senld.gzlt.flowBuy.entity.FlowOrder">
+		<result column="ID" property="id" />
+		<result column="ICCID" property="iccid" />
+		<result column="VIN" property="vin" />
+		<result column="USER_NAME" property="userName" />
+		<result column="MOBILE" property="mobile" />
+		<result column="ORDERNO" property="orderno" />
+		<result column="GOODS_CODE" property="goodsCode" />
+		<result column="GOODS_NAME" property="goodsName" />
+		<result column="SINGLE_PRICE" property="singlePrice" />
+		<result column="PAY_TYPE" property="payType" />
+		<result column="ORDER_TIME" property="orderTime" />
+		<result column="STATE" property="state" />
+		<result column="UPDATE_TIME" property="updateTime" />
+	</resultMap>
+
+	<!-- 通用查询结果列 -->
+	<sql id="Base_Column_List">
+		ID
+		,ICCID
+		,VIN
+		,USER_NAME
+		,MOBILE
+		,ORDERNO
+		,GOODS_CODE
+		,GOODS_NAME
+		,SINGLE_PRICE
+		,PAY_TYPE
+		,ORDER_TIME
+		,STATE
+		,UPDATE_TIME
+	</sql>
+
+
+	<select id="queryList" resultMap="BaseResultMap">
+		SELECT
+		<include refid="Base_Column_List"></include>
+		FROM FLOW_ORDER
+		<where>
+			<if test="id !=null and id>0 ">
+				ID = #{id}
+			</if>
+		</where>
+	</select>
+
+	<select id="queryUnpaidOrders" resultMap="BaseResultMap">
+		SELECT
+		<include refid="Base_Column_List"></include>
+		FROM FLOW_ORDER
+		WHERE STATE = 1
+	</select>
+	<update id="updateStateByOrderNo" parameterType="com.senld.gzlt.flowBuy.entity.FlowOrder">
+		UPDATE
+		FLOW_ORDER
+		SET STATE = #{state},
+		UPDATE_TIME = NOW()
+		WHERE ORDERNO = #{orderno}
+	</update>
+</mapper>

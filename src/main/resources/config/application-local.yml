@@ -1,0 +1,13 @@
+spring:
+  datasource:
+    url: jdbc:mysql://10.195.20.251:33060/boss-base?useUnicode=true&characterEncoding=utf-8&useSSL=false&allowMultiQueries=true&zeroDateTimeBehavior=convertToNull
+    username: root
+    password: senld
+  redis:
+    host: 10.195.20.251 #单机模式
+    port: 6379
+    password: 123456
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: http://senld:senld2018@localhost:9901/eureka/

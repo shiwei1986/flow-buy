@@ -1,0 +1,86 @@
+package ${package.Service};
+
+import ${package.Entity}.${entity};
+import java.util.List;
+import java.util.Map;
+import com.baomidou.mybatisplus.plugins.Page;
+import com.senld.boss.common.base.BaseService;
+import com.senld.boss.common.bean.RespBodyObj;
+/**
+ * 
+ * ${cfg.entityName}${entity}业务类接口
+ * 
+ *
+ * @author ${author}
+ * @since ${date}
+ */
+public interface ${table.serviceName} extends BaseService<${entity}> {
+
+	 /**
+	 * 分页查询${cfg.entityName}${entity}列表
+	 * 
+	 * @param params
+	 *            查询${entity}参数
+	 * @return RespBodyObj<Page<${entity}>>
+	 */
+	RespBodyObj<Page<${entity}>> queryList(Page<${entity}> page,Map<String,Object> params);
+	
+	/**
+	 * 查询${cfg.entityName}${entity}列表
+	 * 
+	 * @param params
+	 *            查询${entity}参数
+	 * @return RespBodyObj<List<${entity}>>
+	 */
+	RespBodyObj<List<${entity}>> queryList(Map<String,Object> params);
+	
+	/**
+	 * 查询${cfg.entityName}${entity}列表
+	 * 
+	 * @param ${table.entityPath}
+	 *            查询${entity}参数
+	 * @return RespBodyObj<List<${entity}>>
+	 */
+	RespBodyObj<List<${entity}>> queryList(${entity} ${table.entityPath});
+
+	/**
+	 * 根据id查询${cfg.entityName}${entity}单个对象
+	 * 
+	 * @param ${table.entityPath}
+	 * @return RespBodyObj<${entity}>
+	 */
+	RespBodyObj<${entity}> info(${entity} ${table.entityPath});
+
+	/**
+	 * 添加${cfg.entityName}${entity}对象
+	 * 
+	 * @param ${table.entityPath}
+	 * @return RespBodyObj<${entity}>
+	 */
+	RespBodyObj<${entity}> save(${entity} ${table.entityPath});
+
+	/**
+	 * 修改${cfg.entityName}${entity}对象
+	 * 
+	 * @param ${table.entityPath}
+	 * @return RespBodyObj<${entity}>
+	 */
+	RespBodyObj<${entity}> update(${entity} ${table.entityPath});
+
+	/**
+	 * 根据id删除${cfg.entityName}${entity}对象
+	 * 
+	 * @param ${table.entityPath}
+	 * @return RespBodyObj<${entity}>
+	 */
+	RespBodyObj<${entity}> delete(${entity} ${table.entityPath});
+	
+	/**
+	 * 批量删除${cfg.entityName}${entity}对象
+	 * 
+	 * @param ids
+	 *          主键集合
+	 * @return RespBodyObj<?>
+	 */
+	RespBodyObj<?> deleteBatch(List<Long> ids);
+}

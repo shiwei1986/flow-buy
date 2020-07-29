@@ -1,0 +1,155 @@
+package ${package.Controller};
+
+import com.senld.boss.common.base.BaseUrl;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+#if(${restControllerStyle})
+import org.springframework.web.bind.annotation.RestController;
+#else
+import org.springframework.stereotype.Controller;
+#end
+
+#if(${superControllerClassPackage})
+import ${superControllerClassPackage};
+#end
+import java.util.List;
+import java.util.Map;
+import com.senld.boss.common.support.HttpCode;
+import com.baomidou.mybatisplus.plugins.Page;
+import com.senld.boss.common.bean.RespBodyObj;
+import ${package.Entity}.${entity};
+import ${package.Service}.${table.serviceName};
+import com.senld.boss.common.validator.ValidatorUtils;
+import com.senld.boss.common.validator.group.*;
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
+/**
+ * 
+ * ${entity}web请求处理控制器 $!{table.comment}${cfg.entityName}
+ * 
+ *
+ * @author ${author}
+ * @since ${date}
+ */
+#if(${restControllerStyle})
+@RestController
+#else
+@Controller
+#end
+@Api(tags = "${cfg.entityName}web请求控制器")
+@RequestMapping("#if(${package.ModuleName})/${package.ModuleName}#end/#if(${controllerMappingHyphenStyle})${controllerMappingHyphen}#else${table.entityPath}#end")
+public class ${table.controllerName} extends BaseController {
+	@Autowired
+	private ${table.serviceName}  ${table.entityPath}Service;
+	
+    /**
+	 * 分页查询${entity}对象列表
+	 *
+	 * @param params
+	 *            ${entity}
+	 * @return RespBodyObj<Page<${entity}>>
+	 */
+	@PostMapping(BaseUrl.QUERY_URL)
+	@ApiOperation("分页查询${cfg.entityName}")
+	public RespBodyObj<Page<${entity}>> list(@RequestBody Map<String, Object>  params){
+	   	Page<${entity}> page = this.buildPage(params);
+		return ${table.entityPath}Service.queryList(page,params);
+	}
+	
+	/**
+	 * 查询${entity}对象列表,不带分页
+	 *
+	 * @param params
+	 *            ${entity}
+	 * @return RespBodyObj<List<${entity}>>
+	 */
+	@PostMapping(BaseUrl.QUERY_NO_PAGE_URL)
+	@ApiOperation("不分页查询${cfg.entityName}")
+	public RespBodyObj<List<${entity}>> queryList(@RequestBody Map<String, Object>  params){
+		 return ${table.entityPath}Service.queryList(params);
+	}
+	
+	/**
+     * 添加${entity}对象
+     *
+     * @param params
+	 *            ${entity}
+     * @return RespBodyObj<${entity}>
+     */
+	@PostMapping(BaseUrl.SAVE_URL)
+	@ApiOperation("添加${cfg.entityName}")
+	public RespBodyObj<${entity}> save(@RequestBody ${entity} ${table.entityPath}){
+	   ValidatorUtils.validateEntity(${table.entityPath}, AddGroup.class);
+	   return ${table.entityPath}Service.save(${table.entityPath});
+	
+	}
+	
+    /**
+     * 修改${entity}对象
+     *
+     * @param params
+	 *            ${entity}
+     * @return RespBodyObj<${entity}>
+     */
+	@PostMapping(BaseUrl.UPDATE_URL)
+	@ApiOperation("修改${cfg.entityName}")
+	public RespBodyObj<${entity}> update${entity}(@RequestBody ${entity} ${table.entityPath}){
+	     ValidatorUtils.validateEntity(${table.entityPath}, UpdateGroup.class);
+		 return ${table.entityPath}Service.update(${table.entityPath});
+	}
+	
+    /**
+     * 查询单个${entity}对象
+     *
+     * @param params
+	 *            ${entity}
+     * @return RespBodyObj<${entity}>
+     */
+	@PostMapping(BaseUrl.INFO_URL)
+	@ApiOperation("单个查询${cfg.entityName}")
+	public RespBodyObj<${entity}> info(@RequestBody ${entity} ${table.entityPath}){
+	     if(${table.entityPath} == null){
+	        return RespBodyObj.error(HttpCode.REQUEST_PARAM_NULL);
+	     }
+		 return ${table.entityPath}Service.info(${table.entityPath});
+		 
+	}
+	
+	/**
+     * 删除${entity}对象
+     *
+     * @param ${table.entityPath}
+     * @return RespBodyObj<${entity}>
+     */
+	@PostMapping(BaseUrl.DELETE_URL)
+	@ApiOperation("删除${cfg.entityName}")
+	public RespBodyObj<${entity}> delete(@RequestBody ${entity} ${table.entityPath}){
+	     if(${table.entityPath} == null){
+	        return RespBodyObj.error(HttpCode.REQUEST_PARAM_NULL);
+	     }
+		 return ${table.entityPath}Service.delete(${table.entityPath});
+	}
+	
+	/**
+	 * 批量删除${entity}对象
+	 *
+	 * @param ids
+	 *             主键集合
+	 * @return RespBodyObj<?>
+	 */
+	@PostMapping(BaseUrl.DELETE_BATCH_URL)
+	@ApiOperation("批量${cfg.entityName}")
+	public RespBodyObj<?> deleteBacth(@RequestBody List<Long> ids) {
+	    if (ids == null || ids.size() == 0) {
+			return RespBodyObj.error(HttpCode.REQUEST_PARAM_NULL);
+		} 
+		return ${table.entityPath}Service.deleteBatch(ids);
+		
+	}
+	
+	public void set${table.serviceName}(${table.serviceName} ${table.entityPath}Service) {
+		this.${table.entityPath}Service = ${table.entityPath}Service;
+	}
+}

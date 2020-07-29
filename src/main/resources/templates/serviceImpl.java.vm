@@ -1,0 +1,133 @@
+package ${package.ServiceImpl};
+
+import ${package.Entity}.${entity};
+import com.baomidou.mybatisplus.plugins.Page;
+import ${package.Mapper}.${table.mapperName};
+import ${package.Service}.${table.serviceName};
+import com.senld.boss.common.base.BaseServiceImpl;
+import java.util.List;
+import java.util.Map;
+import com.senld.boss.common.bean.RespBodyObj;
+import org.springframework.stereotype.Service;
+import com.senld.boss.common.support.HttpCode;
+/**
+ * ${cfg.entityName}${entity}业务实现类
+ *
+ * @author ${author}
+ * @since ${date}
+ */
+@Service
+public class ${table.serviceImplName} extends BaseServiceImpl<${table.mapperName}, ${entity}> implements ${table.serviceName} {
+    
+    /**
+	 * 分页查询${cfg.entityName}${entity}列表
+	 * 
+	 * @param params
+	 *            查询${entity}参数
+	 * @return RespBodyObj<Page<${entity}>>
+	 */
+	@Override
+	public RespBodyObj<Page<${entity}>> queryList(Page<${entity}> page, Map<String,Object> params) {
+		if (page == null||params == null)
+			return RespBodyObj.error(HttpCode.REQUEST_PARAM_NULL);
+		List<${entity}> list = baseMapper.queryList(page, params);
+		page.setRecords(list);
+		return RespBodyObj.ok(page);
+	}
+
+	/**
+	 * 查询${cfg.entityName}${entity}列表
+	 * 
+	 * @param params
+	 *            查询${entity}参数
+	 * @return RespBodyObj<List<${entity}>>
+	 */
+	@Override
+	public RespBodyObj<List<${entity}>> queryList(Map<String,Object> params) {
+		return RespBodyObj.ok(baseMapper.queryList(params));
+	}
+	
+	/**
+	 * 查询${cfg.entityName}${entity}列表
+	 * 
+	 * @param ${table.entityPath}
+	 *            查询${entity}参数
+	 * @return RespBodyObj<List<${entity}>>
+	 */
+	@Override
+	public RespBodyObj<List<${entity}>> queryList(${entity} ${table.entityPath}) {
+		return RespBodyObj.ok(baseMapper.queryList(${table.entityPath}));
+	}
+
+	/**
+	 * 根据id查询${cfg.entityName}${entity}单个对象
+	 * 
+	 * @param ${table.entityPath}
+	 * @return RespBodyObj<${entity}>
+	 */
+	@Override
+	public RespBodyObj<${entity}> info(${entity} ${table.entityPath}) {
+		return RespBodyObj.ok(baseMapper.selectById(${table.entityPath}.getId()));
+	}
+
+	/**
+	 * 添加${cfg.entityName}${entity}对象
+	 * 
+	 * @param ${table.entityPath}
+	 * @return RespBodyObj<${entity}>
+	 */
+	@Override
+	public RespBodyObj<${entity}> save(${entity} ${table.entityPath}) {
+		if (baseMapper.insert(${table.entityPath}) > 0) {
+			return RespBodyObj.ok(${table.entityPath});
+		} else {
+			return RespBodyObj.error(HttpCode.SQL_SAVE_ERROR);
+		}
+	}
+
+	/**
+	 * 修改${cfg.entityName}${entity}对象
+	 * 
+	 * @param ${table.entityPath}
+	 * @return RespBodyObj<${entity}>
+	 */
+	@Override
+	public RespBodyObj<${entity}> update(${entity} ${table.entityPath}) {
+		if (baseMapper.updateAllColumnById(${table.entityPath}) > 0) {
+			return RespBodyObj.ok(${table.entityPath});
+		} else {
+			return RespBodyObj.error(HttpCode.SQL_UPDATE_ERROR);
+		}
+	}
+
+	/**
+	 * 根据id删除${cfg.entityName}${entity}对象
+	 * 
+	 * @param ${table.entityPath}
+	 * @return RespBodyObj<${entity}>
+	 */
+	@Override
+	public RespBodyObj<${entity}> delete(${entity} ${table.entityPath}) {
+		if (baseMapper.deleteById(${table.entityPath}.getId()) > 0) {
+			return RespBodyObj.ok(${table.entityPath});
+		} else {
+			return RespBodyObj.error(HttpCode.SQL_DELETE_ERROR);
+		}
+	}
+	
+	/**
+	 * 批量删除${cfg.entityName}${entity}对象
+	 * 
+	 * @param ids
+	 *          主键集合
+	 * @return RespBodyObj<?>
+	 */
+	public RespBodyObj<?> deleteBatch(List<Long> ids) {
+		if (baseMapper.deleteBatchIds(ids) > 0) {
+			return RespBodyObj.ok();
+		} else {
+			return RespBodyObj.error(HttpCode.SQL_DETETE_BATCH_ERROR);
+		}
+	}
+
+}

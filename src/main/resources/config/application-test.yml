@@ -1,0 +1,28 @@
+spring:
+  datasource:
+    url: jdbc:mysql://10.195.20.251:33060/boss-base?useUnicode=true&characterEncoding=utf-8&useSSL=false&allowMultiQueries=true&zeroDateTimeBehavior=convertToNull
+    username: root
+    password: senld
+  redis:
+    host: 10.195.20.251 #单机模式
+    port: 6379
+    password: 123456
+    
+
+gzapi:
+  xv: 
+    key: 4c5c129f6a1c4dcab5c2c44f44727cc9
+    secret: PkytC9ZMRbCa67re6tzGrg==
+    productId: 576652285887547084
+    prodId: 576652285887547084
+    prefixUrl: http://pre-ocu4.cu-sc.com:8081
+senld: 
+  auth: 
+    username: senld_fb@2020
+    password: senld@2020
+    secretKey: senld_secretKey@2020
+eureka:
+  client:
+    serviceUrl:
+     defaultZone: http://senld:senld2018@10.195.20.251:9901/eureka/,http://senld:senld2018@10.195.20.251:9902/eureka/
+

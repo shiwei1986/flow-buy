@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8" />
+<title>mail</title>
+<style type="text/css">table{border-collapse:collapse}.table-bordered,.table-bordered td,.table-bordered th{border:1px solid #ddd}.table{width:100%;max-width:100%;margin-bottom:20px}.table td,.table th{padding:8px;line-height:1.53846154;vertical-align:top;border-bottom:1px solid #ddd;transition:all .3s cubic-bezier(.175,.885,.32,1)}.table thead>tr>th{text-align:left;background-color:#f1f1f1}.table tbody th{width:15%;text-align:right}.table tbody td{width:35%}/*! normalize.css v5.0.0 | MIT License | github.com/necolas/normalize.css */body{font-family:Helvetica Neue,Helvetica,PingFang SC,Hiragino Sans GB,Microsoft YaHei,\\5FAE\8F6F\96C5\9ED1,Arial,sans-serif;font-size:12px;line-height:1.5;color:#495060;background-color:#fff;-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale}</style>
+</head>
+<body>
+	<div
+		class="ivu-col ivu-col-span-xs-24 ivu-col-span-sm-24 ivu-col-span-md-16 ivu-col-span-lg-16">
+		<table class="table table-bordered">
+			<thead>
+				<tr>
+					<th colspan="4">警情明细</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr>
+					<th>车牌号</th>
+					<td th:text="${industryStatistics.plateNumber}">啥也没有</td>
+				</tr>
+				<tr>
+					<th>终端序列号</th>
+					<td th:text="${industryStatistics.serialNumber}">啥也没有</td>
+				</tr>
+				<tr>
+					<th>油卡卡号</th>
+					<td th:text="${industryStatistics.cardNumber}">啥也没有</td>
+				</tr>
+				<tr>
+					<th>报警时间</th>
+					<td th:text="${#dates.format(industryStatistics.wainTime,'yyyy-MM-dd HH:mm:ss')}">啥也没有</td>
+				</tr>
+				<tr>
+					<th>报警信息</th>
+					<td th:text="${alarmType}">啥也没有</td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+
+</body>
+</html>
