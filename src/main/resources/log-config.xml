@@ -5,8 +5,7 @@
 	<contextName>${appName}</contextName>
 	<appender name="console" class="ch.qos.logback.core.ConsoleAppender">
 		<encoder>
-			<pattern>[%d{yyyy-MM-dd HH:mm:ss}]%thread %-5level %logger{135}
-				Line:%-3L - %msg %n</pattern>
+			<pattern>[%d{yyyy-MM-dd HH:mm:ss}]%thread %-5level %logger{135} Line:%-3L - %msg %n</pattern>
 		</encoder>
 	</appender>
 
@@ -23,8 +22,7 @@
 			<totalSizeCap>1GB</totalSizeCap>
 		</rollingPolicy>
 		<encoder>
-			<pattern>[%d{yyyy-MM-dd HH:mm:ss}]%thread %-5level %logger Line:%-3L
-				- %msg%n</pattern>
+			<pattern>[%d{yyyy-MM-dd HH:mm:ss}]%thread %-5level %logger Line:%-3L - %msg%n</pattern>
 			<charset>utf-8</charset>
 		</encoder>
 	</appender>
@@ -42,8 +40,7 @@
 			<totalSizeCap>1GB</totalSizeCap>
 		</rollingPolicy>
 		<encoder>
-			<pattern>[%d{yyyy-MM-dd HH:mm:ss}]%thread %-5level %logger Line:%-3L
-				- %msg%n</pattern>
+			<pattern>[%d{yyyy-MM-dd HH:mm:ss}]%thread %-5level %logger Line:%-3L - %msg%n</pattern>
 			<charset>utf-8</charset>
 		</encoder>
 		<filter class="ch.qos.logback.classic.filter.LevelFilter">
@@ -66,8 +63,7 @@
 			<totalSizeCap>1GB</totalSizeCap>
 		</rollingPolicy>
 		<encoder>
-			<pattern>[%d{yyyy-MM-dd HH:mm:ss}]%thread %-5level %logger Line:%-3L
-				- %msg%n</pattern>
+			<pattern>[%d{yyyy-MM-dd HH:mm:ss}]%thread %-5level %logger Line:%-3L - %msg%n</pattern>
 			<charset>utf-8</charset>
 		</encoder>
 		<filter class="ch.qos.logback.classic.filter.LevelFilter">
@@ -90,8 +86,7 @@
 			<totalSizeCap>1GB</totalSizeCap>
 		</rollingPolicy>
 		<encoder>
-			<pattern>[%d{yyyy-MM-dd HH:mm:ss}]%thread %-5level %logger Line:%-3L
-				- %msg%n</pattern>
+			<pattern>[%d{yyyy-MM-dd HH:mm:ss}]%thread %-5level %logger Line:%-3L - %msg%n</pattern>
 			<charset>utf-8</charset>
 		</encoder>
 		<filter class="ch.qos.logback.classic.filter.LevelFilter">
@@ -110,9 +105,9 @@
 	<logger name="systemLog" level="INFO" additivity="false">
 		<appender-ref ref="systemLogAppender" />
 	</logger>
-	<!-- 打印项目中的sql语句，生产环境去掉此logger -->
+	<!-- 打印项目中的sql语句，生产环境去掉此logger 
 	<logger name="com.senld.gzlt.flowBuy.mapper" level="DEBUG"></logger>
-	<logger name="com.senld.gzlt" level="INFO"></logger>
+	<logger name="com.senld.gzlt" level="INFO"></logger>-->
 
 	<root level="INFO">
 		<!-- 生产环境去掉console,file -->

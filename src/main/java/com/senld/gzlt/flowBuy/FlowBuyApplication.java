@@ -6,10 +6,14 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
 import org.springframework.cloud.netflix.feign.EnableFeignClients;
 import org.springframework.cloud.netflix.hystrix.EnableHystrix;
+import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.scheduling.annotation.EnableAsync;
 import org.springframework.scheduling.annotation.EnableScheduling;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
+
+import com.senld.gzlt.flowBuy.aspect.CacheKeyGenerator;
+import com.senld.gzlt.flowBuy.aspect.LockKeyGenerator;
 
 import springfox.documentation.swagger2.annotations.EnableSwagger2;
 
@@ -18,7 +22,7 @@ import springfox.documentation.swagger2.annotations.EnableSwagger2;
  *
  */
 @SpringBootApplication
-@ComponentScan(basePackages = { "com.senld.gzlt.flowBuy"})
+@ComponentScan(basePackages = { "com.senld.gzlt.flowBuy" })
 @EnableHystrix
 @EnableDiscoveryClient
 @EnableFeignClients // feign开启远程调用
@@ -30,5 +34,10 @@ import springfox.documentation.swagger2.annotations.EnableSwagger2;
 public class FlowBuyApplication {
 	public static void main(String[] args) {
 		SpringApplication.run(FlowBuyApplication.class, args);
+	}
+
+	@Bean
+	public CacheKeyGenerator cacheKeyGenerator() {
+		return new LockKeyGenerator();
 	}
 }

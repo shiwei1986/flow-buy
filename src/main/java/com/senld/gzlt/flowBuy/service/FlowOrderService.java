@@ -54,7 +54,9 @@ public interface FlowOrderService extends BaseService<FlowOrder> {
 	 * @param flowOrder
 	 * @return RespBodyObj<FlowOrder>
 	 */
-	RespBodyObj<FlowOrder> update(FlowOrder flowOrder);
+	RespBodyObj<FlowOrder> update2(Map<String, Object> params);
+	
+	RespBodyObj<FlowOrder> update(Map<String, Object> params);
 	
 	/**
 	 * 根据订单编码修改订单状态

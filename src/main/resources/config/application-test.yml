@@ -4,9 +4,8 @@ spring:
     username: root
     password: senld
   redis:
-    host: 10.195.20.251 #单机模式
+    host: 10.195.20.32 #单机模式
     port: 6379
-    password: 123456
     
 
 gzapi:

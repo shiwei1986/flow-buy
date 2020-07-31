@@ -58,7 +58,7 @@ public class SystemTask {
 	 * 流量订单定时任务,每隔10秒执行一次任务
 	 */
 //	@Scheduled(cron = "*/10 * * * * ?")
-	@Scheduled(cron = "0 */5 * * * ?")
+//	@Scheduled(cron = "0 */5 * * * ?")
 	public void flowOrderTask() {
 		List<FlowOrder> flowOrders = flowOrderService.queryUnpaidOrders();
 		if (null != flowOrders && flowOrders.size() > 0) {
