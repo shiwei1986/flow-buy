@@ -5,7 +5,7 @@ server:
     max-threads: 1000
     uri-encoding: UTF-8
   display-name: flowBuy
-  
+
 spring:
   application:
     name: flowBuy
@@ -54,6 +54,9 @@ spring:
       max-wait: 1000
       max-idle: 500
       min-idle: 50
+  mvc:
+    async:
+      request-timeout: -1
 
 mybatis-plus:
   typeAliasesPackage: com.senld.gzlt.flowBuy.entity
