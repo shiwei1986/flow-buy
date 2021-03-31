@@ -95,7 +95,7 @@
 		<dependency><!-- springboot整合swagger2出现jar冲突，强制指定最新版本的jar -->
             <groupId>com.google.guava</groupId>
             <artifactId>guava</artifactId>
-            <version>26.0-jre</version><!--$NO-MVN-MAN-VER$ -->
+            <version>29.0-jre</version><!--$NO-MVN-MAN-VER$ -->
         </dependency>
 		<dependency>
 			<groupId>org.projectlombok</groupId>
